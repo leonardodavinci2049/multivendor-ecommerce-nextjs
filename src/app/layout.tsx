@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Barlow, Inter } from "next/font/google";
 // Global css
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 
 // Fonts
 const interFont = Inter({ subsets: ["latin"] });
@@ -12,13 +13,11 @@ const barlowFont = Barlow({
   variable: "--font-barlow",
 });
 
-
-
-
 // Metadata
 export const metadata: Metadata = {
   title: "GoShop",
-  description: "Welcome to GoShop,  your one-stop shop for all things shopping!",
+  description:
+    "Welcome to GoShop,  your one-stop shop for all things shopping!",
 };
 
 export default function RootLayout({
@@ -28,8 +27,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
- <body className={`${interFont.className} ${barlowFont.variable}`}>
-        {children}
+      <body className={`${interFont.className} ${barlowFont.variable}`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
